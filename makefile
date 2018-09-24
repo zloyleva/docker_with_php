@@ -1,5 +1,6 @@
 docker_php = simple_docker_php-fpm_1
 docker_nginx = simple_docker_nginx_1
+docker_mysql = simple_docker_mysql_1
 
 #some commands
 start: #Containers start
@@ -16,3 +17,6 @@ connect_php:
 
 connect_nginx:
 	@sudo docker exec -it $(docker_nginx) bash
+
+connect_mysql:
+	@sudo docker exec -it $(docker_mysql) bash

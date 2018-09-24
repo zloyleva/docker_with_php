@@ -15,8 +15,24 @@ services:
       - ./logs/nginx-error.log:/var/log/nginx/error.log
 
   php-fpm:
-    image: php:fpm
+    build:
+      context: .
+      dockerfile: .php-fpm/Dockerfile
     ports:
       - "9000:9000"
     volumes:
       - ./public:/application/public
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=forge
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=123456
+    ports:
+      - "3306:3306"
